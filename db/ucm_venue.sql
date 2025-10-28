@@ -247,8 +247,8 @@ CREATE TABLE `kategori` (
 --
 
 INSERT INTO `kategori` (`id_kategori`, `nama_kategori`, `slug_kat`, `created_by`, `created_at`, `modified_by`, `modified_at`) VALUES
-(1, 'Turnamen', 'turnamen', 'amperakoding', '2018-07-23 08:38:39', 'amperakoding', '2021-05-17 19:58:57'),
-(2, 'Kerja Sama', 'kerja-sama', 'amperakoding', '2018-07-23 08:38:39', 'amperakoding', '2021-05-17 19:58:57');
+(1, 'Turnamen', 'turnamen', 'wyattmatt', '2018-07-23 08:38:39', 'wyattmatt', '2021-05-17 19:58:57'),
+(2, 'Kerja Sama', 'kerja-sama', 'wyattmatt', '2018-07-23 08:38:39', 'wyattmatt', '2021-05-17 19:58:57');
 
 -- --------------------------------------------------------
 
