@@ -19,6 +19,12 @@ class Event extends CI_Controller {
 		$this->data['foto_data'] 					= $this->Foto_model->get_all_new_home();
 		$this->data['kategori_sidebar'] 	= $this->Kategori_model->get_all();
 		$this->data['kontak_sidebar'] 		= $this->Kontak_model->get_all();
+		
+		// Load language system
+		$this->load->helper('language_helper');
+		$user_lang = detect_user_language();
+		$this->lang->load('site', $user_lang);
+		$this->data['current_lang'] = $user_lang;
   }
 
 	public function read($id)
@@ -123,7 +129,7 @@ class Event extends CI_Controller {
   public function archive()
   {
     /* menyiapkan data yang akan disertakan/ ditampilkan pada view */
-    $this->data['title'] = "Semua Event";
+    $this->data['title'] = "Semua Events";
 
     /* memanggil library pagination (membuat halaman) */
     $this->load->library('pagination');

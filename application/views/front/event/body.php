@@ -4,12 +4,12 @@
 <div class="container">
 	<ol class="breadcrumb">
 	  <li><a href="<?php echo base_url() ?>">Home</a></li>
-	  <li><a href="#">Event</a></li>
+	  <li><a href="#">Events</a></li>
 	  <li class="active"><?php echo $event_detail->nama_event ?></li>
 	</ol>
 
 	<div class="row">
-		<div class="col-md-8"><h1><?php echo strtoupper($event_detail->nama_event) ?></h1>
+		<div class="col-md-12"><h1><?php echo strtoupper($event_detail->nama_event) ?></h1>
 			<a href="<?php echo base_url('assets/images/event/').$event_detail->foto.$event_detail->foto_type ?>" title="<?php echo $event_detail->nama_event ?>">
 				<img src="<?php echo base_url('assets/images/event/').$event_detail->foto.'_thumb'.$event_detail->foto_type ?>" alt="<?php echo $event_detail->nama_event ?>" class="img-responsive">
 			</a>
@@ -23,9 +23,9 @@
 				<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ae2ee03de20620011e03337&product=inline-share-buttons"></script>
 			</p>
 
-			<?php $this->load->view('front/modul/mod_komen'); ?>
-		</div>
-		<?php $this->load->view('front/sidebar'); ?>
+		<?php $this->load->view('front/modul/mod_komen'); ?>
 	</div>
+	<?php /* $this->load->view('front/sidebar'); */ ?>
+</div>
 </div>
 <?php $this->load->view('front/footer'); ?>

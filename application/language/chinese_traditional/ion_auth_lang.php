@@ -15,40 +15,40 @@
 */
 
 // Account Creation
-$lang['account_creation_successful']            = 'Account successfully created';
-$lang['account_creation_unsuccessful']          = 'Unable to create account';
-$lang['account_creation_duplicate_email']       = 'Email already registered/invalid';
+$lang['account_creation_successful']            = 'Akun Berhasil dibuat';
+$lang['account_creation_unsuccessful']          = 'Tidak dapat membuat akun';
+$lang['account_creation_duplicate_email']       = 'Email sudah terdaftar/ tidak valid';
 $lang['account_creation_duplicate_identity']    = 'Identity Already Used or Invalid';
 $lang['account_creation_missing_default_group'] = 'Default group is not set';
 $lang['account_creation_invalid_default_group'] = 'Invalid default group name set';
 
 
 // Password
-$lang['password_change_successful']          = 'Password successfully changed';
-$lang['password_change_unsuccessful']        = 'Failed to change password, please try again';
-$lang['forgot_password_successful']          = 'Password reset has been sent to your email';
-$lang['forgot_password_unsuccessful']        = 'Failed to reset password, please try again';
+$lang['password_change_successful']          = 'Password telah berhasil diubah';
+$lang['password_change_unsuccessful']        = 'Gagal ubah password, silahkan coba lagi';
+$lang['forgot_password_successful']          = 'Reset Password telah dikirim ke email Anda';
+$lang['forgot_password_unsuccessful']        = 'Gagal reset password, silahkan coba lagi';
 
 // Activation
-$lang['activate_successful']                 = 'Account successfully activated';
-$lang['activate_unsuccessful']               = 'Failed to activate account';
-$lang['deactivate_successful']               = 'Account successfully deactivated';
-$lang['deactivate_unsuccessful']             = 'Failed to deactivate account';
-$lang['activation_email_successful']         = 'Activation email sent';
-$lang['activation_email_unsuccessful']       = 'Activation email not sent';
+$lang['activate_successful']                 = 'Akun berhasil dibuat';
+$lang['activate_unsuccessful']               = 'Gagal membuat akun';
+$lang['deactivate_successful']               = 'Akun dinonaktifkan';
+$lang['deactivate_unsuccessful']             = 'Akun tidak dapat dinonaktifkan';
+$lang['activation_email_successful']         = 'Email aktivasi terkirim';
+$lang['activation_email_unsuccessful']       = 'Email aktivasi tidak terkirim';
 
 // Login / Logout
-$lang['login_successful']                    = 'Login successful';
-$lang['login_unsuccessful']                  = 'Login failed';
-$lang['login_unsuccessful_not_active']       = 'Your account is not active';
-$lang['login_timeout']                       = 'Your account is temporarily locked';
-$lang['logout_successful']                   = 'Logout successful';
+$lang['login_successful']                    = 'Login berhasil';
+$lang['login_unsuccessful']                  = 'Gagal login';
+$lang['login_unsuccessful_not_active']       = 'Akun Anda tidak aktif';
+$lang['login_timeout']                       = 'Akun Anda dikunci sementara';
+$lang['logout_successful']                   = 'Logout berhasil';
 
 // Account Changes
-$lang['update_successful']                   = 'Account successfully updated';
-$lang['update_unsuccessful']                 = 'Failed to update account';
-$lang['delete_successful']                   = 'User successfully deleted';
-$lang['delete_unsuccessful']                 = 'Failed to delete user';
+$lang['update_successful']                   = 'Akun berhasil diupdate';
+$lang['update_unsuccessful']                 = 'Gagal mengupdate akun';
+$lang['delete_successful']                   = 'User telah dihapus';
+$lang['delete_unsuccessful']                 = 'Tidak dapat menghapus user';
 
 // Groups
 $lang['group_creation_successful']           = 'Group created Successfully';
@@ -67,10 +67,10 @@ $lang['email_activate_subheading']           = 'Please click this link to %s.';
 $lang['email_activate_link']                 = 'Activate Your Account';
 
 // Forgot Password Email
-$lang['email_forgotten_password_subject']    = 'Password Reset Request';
+$lang['email_forgotten_password_subject']    = 'Permintaan Reset Password';
 $lang['email_forgot_password_heading']       = 'Hi, %s.';
 $lang['email_forgot_password_subheading']    = 'Please click this link to %s.';
-$lang['email_forgot_password_link']          = 'Reset Your Password';
+$lang['email_forgot_password_link']          = 'Reset Password Anda';
 
 // New Password Email
 $lang['email_new_password_subject']          = 'New Password';

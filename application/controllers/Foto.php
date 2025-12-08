@@ -20,6 +20,12 @@ class Client extends CI_Controller {
     $this->data['featured_data'] 			= $this->Featured_model->get_all_front();
     $this->data['kategori_data'] 			= $this->Kategori_model->get_all();
 		$this->data['kontak'] 						= $this->Kontak_model->get_all();
+		
+		// Load language system
+		$this->load->helper('language_helper');
+		$user_lang = detect_user_language();
+		$this->lang->load('site', $user_lang);
+		$this->data['current_lang'] = $user_lang;
   }
 
 	public function index()

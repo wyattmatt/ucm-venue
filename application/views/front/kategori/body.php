@@ -37,8 +37,8 @@
 		      </div>
 	      <?php }} ?>
 			</div>
-			<div class="row" style="text-align:center"><?php echo $pagination; ?></div>
-		</div>
-		<hr>
-		<?php $this->load->view('front/sidebar'); ?>
+		<div class="row" style="text-align:center"><?php echo $pagination; ?></div>
+	</div>
+	<hr>
+	<?php /* $this->load->view('front/sidebar'); */ ?>
   <?php $this->load->view('front/footer'); ?>

@@ -32,13 +32,21 @@
 									<div class="form-group"><label>Link</label>
 										<?php echo form_input($link, $slider->link);?>
 									</div>
-									<div class="form-group"><label>Gambar Sebelumnya</label><br>
-										<img src="<?php echo base_url('assets/images/slider/'.$slider->foto.$slider->foto_type.'') ?>" width="200px"/>
-									</div>
-									<div class="form-group"><label>Gambar Baru</label>
-										<input type="file" class="form-control" name="foto" id="foto" onchange="tampilkanPreview(this,'preview')"/>
-										<br><p><b>Preview Gambar</b><br>
-										<img id="preview" src="" alt="" width="350px"/>
+								<div class="form-group"><label>Media Sebelumnya</label><br>
+									<?php 
+									$video_types = array('.mp4', '.webm');
+									if (in_array(strtolower($slider->foto_type), $video_types)) {
+										echo '<video src="'.base_url('assets/images/slider/'.$slider->foto.$slider->foto_type).'" width="300px" controls></video>';
+									} else {
+										echo '<img src="'.base_url('assets/images/slider/'.$slider->foto.$slider->foto_type).'" width="200px"/>';
+									}
+									?>
+								</div>
+								<div class="form-group"><label>Media Baru</label>
+									<input type="file" class="form-control" name="foto" id="foto" onchange="tampilkanPreview(this,'preview')" accept="image/*,video/*"/>
+									<br><p><b>Preview</b><br>
+									<img id="preview" src="" alt="" width="350px" style="display:none;"/>
+									<video id="preview-video" width="350px" controls style="display:none;"></video>
 									</div>
 									<?php echo form_input($id_slider,$slider->id_slider);?>
 									<button type="submit" name="submit" class="btn btn-success"><?php echo $button_submit ?></button>
@@ -55,31 +63,42 @@
   <?php $this->load->view('back/js') ?>
 	<script type="text/javascript">
 	function tampilkanPreview(foto,idpreview)
-	{ //membuat objek gambar
+	{ //membuat objek gambar atau video
 		var gb = foto.files;
-		//loop untuk merender gambar
+		var imgPreview = document.getElementById('preview');
+		var videoPreview = document.getElementById('preview-video');
+		
+		//loop untuk merender gambar/video
 		for (var i = 0; i < gb.length; i++)
 		{ //bikin variabel
 			var gbPreview = gb[i];
 			var imageType = /image.*/;
-			var preview=document.getElementById(idpreview);
+			var videoType = /video.*/;
 			var reader = new FileReader();
+			
 			if (gbPreview.type.match(imageType))
-			{ //jika tipe data sesuai
-				preview.file = gbPreview;
-				reader.onload = (function(element)
-				{
-					return function(e)
-					{
-						element.src = e.target.result;
-					};
-				})(preview);
-				//membaca data URL gambar
+			{ //jika tipe image
+				imgPreview.file = gbPreview;
+				reader.onload = function(e) {
+					imgPreview.src = e.target.result;
+					imgPreview.style.display = 'block';
+					videoPreview.style.display = 'none';
+				};
+				reader.readAsDataURL(gbPreview);
+			}
+			else if (gbPreview.type.match(videoType))
+			{ //jika tipe video
+				videoPreview.file = gbPreview;
+				reader.onload = function(e) {
+					videoPreview.src = e.target.result;
+					videoPreview.style.display = 'block';
+					imgPreview.style.display = 'none';
+				};
 				reader.readAsDataURL(gbPreview);
 			}
 			else
 			{ //jika tipe data tidak sesuai
-				alert("Tipe file tidak sesuai. Gambar harus bertipe .png, .gif atau .jpg.");
+				alert("Tipe file tidak sesuai. File harus bertipe gambar (.png, .gif, .jpg, .webp) atau video (.mp4, .webm).");
 			}
 		}
 	}

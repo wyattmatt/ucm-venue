@@ -29,10 +29,10 @@
 			<?php if($company->company_fax > 0){ ?>
 			<p><b>Fax:</b><br>
 				<?php echo $company->company_fax ?>
-			</p>
-			<?php } ?>
-		</div>
-		<?php $this->load->view('front/sidebar'); ?>
+		</p>
+		<?php } ?>
 	</div>
+	<?php /* $this->load->view('front/sidebar'); */ ?>
+</div>
 </div>
 <?php $this->load->view('front/footer'); ?>

@@ -21,12 +21,18 @@ class Gallery extends CI_Controller {
 		$this->data['event_sidebar'] 			= $this->Event_model->get_all_sidebar();
 		$this->data['kategori_sidebar'] 	= $this->Kategori_model->get_all();
 		$this->data['kontak_sidebar'] 		= $this->Kontak_model->get_all();
+		
+		// Load language system
+		$this->load->helper('language_helper');
+		$user_lang = detect_user_language();
+		$this->lang->load('site', $user_lang);
+		$this->data['current_lang'] = $user_lang;
   }
 
 	public function album()
 	{
 		/* menyiapkan data yang akan disertakan/ ditampilkan pada view */
-    $this->data['title'] = "Semua Album Foto";
+    $this->data['title'] = "Semua Venues";
 
     /* memanggil library pagination (membuat halaman) */
     $this->load->library('pagination');

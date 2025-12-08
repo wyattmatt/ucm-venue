@@ -39,7 +39,7 @@
                 <div class="form-group col-md-6"><label>Provinsi</label>
                   <?php echo form_dropdown('', $ambil_provinsi, '', $provinsi_id); ?>
                 </div>
-                <div class="form-group col-md-6"><label>Kabupaten/ Kota</label>
+                <div class="form-group col-md-6"><label>Kabupaten/Kota</label>
                   <?php echo form_dropdown('', array(''=>'- Pilih Kota -'), '', $kota_id); ?>
                 </div>
               </div>

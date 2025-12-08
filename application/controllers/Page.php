@@ -18,6 +18,12 @@ class Page extends CI_Controller {
 		$this->data['kategori_sidebar'] 	= $this->Kategori_model->get_all();
 		$this->data['kontak_sidebar'] 		= $this->Kontak_model->get_all();
 		$this->data['kontak'] 				= $this->Kontak_model->get_all();
+		
+		// Load language system
+		$this->load->helper('language_helper');
+		$user_lang = detect_user_language();
+		$this->lang->load('site', $user_lang);
+		$this->data['current_lang'] = $user_lang;
   }
 
 	public function about()

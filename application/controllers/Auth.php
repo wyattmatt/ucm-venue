@@ -8,9 +8,12 @@ class Auth extends CI_Controller
 		parent::__construct();
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 
+		// Load language helper (provides lang() function)
+		$this->load->helper('language');
 		$this->lang->load('auth');
 
 		$this->load->model('Company_model');
+		$this->load->model('Event_model');
 		$this->load->model('Kontak_model');
 		$this->load->model('Ion_auth_model');
 		$this->load->model('Wilayah_model');
@@ -18,6 +21,14 @@ class Auth extends CI_Controller
 		$this->data['module'] = 'Customer';
 		$this->data['company_data'] = $this->Company_model->get_by_company();
 		$this->data['kontak'] = $this->Kontak_model->get_all();
+		$this->data['event_sidebar'] = $this->Event_model->get_all_sidebar();
+		$this->data['kontak_sidebar'] = $this->Kontak_model->get_all();
+		
+		// Load custom language helper and detect user language
+		$this->load->helper('language_helper');
+		$user_lang = detect_user_language();
+		$this->lang->load('site', $user_lang); // Load site translations
+		$this->data['current_lang'] = $user_lang;
 	}
 
 	public function register()
@@ -68,10 +79,27 @@ class Auth extends CI_Controller
 			);
 
 			// mengirimkan data yang sudah disediakan diatas $additional_data $email, $identity $password
-			$this->ion_auth->register($identity, $password, $email, $additional_data);
+			$new_user_id = $this->ion_auth->register($identity, $password, $email, $additional_data);
+
+			// Link guest bookings to new account if email matches
+			if ($new_user_id) {
+				$this->load->model('Cart_model');
+				
+				// Update transaksi records with matching guest_email
+				$this->db->where('guest_email', $email);
+				$this->db->where('user_id IS NULL', NULL, FALSE);
+				$this->db->update('transaksi', array('user_id' => $new_user_id));
+				
+				$linked_bookings = $this->db->affected_rows();
+				
+				if ($linked_bookings > 0) {
+					$this->session->set_flashdata('message', '<div class="alert alert-success alert">Registrasi Berhasil! '.$linked_bookings.' booking sebelumnya telah ditautkan ke akun Anda. Silahkan login untuk melihat riwayat booking.</div>');
+				} else {
+					$this->session->set_flashdata('message', '<div class="alert alert-success alert">Registrasi Berhasil, silahkan login untuk mulai booking lapangan.</div>');
+				}
+			}
 
 			// check to see if we are creating the user | redirect them back to the admin page
-			$this->session->set_flashdata('message', '<div class="alert alert-success alert">Registrasi Berhasil, silahkan login untuk mulai booking lapangan.</div>');
 			redirect(base_url());
 		} else {
 			// display the create user form | set the flash data error message if there is one
@@ -573,7 +601,9 @@ class Auth extends CI_Controller
 	// sama seperti view
 	public function _render_page($view, $data = null, $returnhtml = false)
 	{
-
+		// Ensure language helper is loaded
+		$this->load->helper('language');
+		
 		$this->viewdata = (empty($data)) ? $this->data : $data;
 
 		$view_html = $this->load->view($view, $this->viewdata, $returnhtml);

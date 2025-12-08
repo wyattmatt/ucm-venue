@@ -125,6 +125,41 @@
 					<p align="center">~ Terima Kasih ~</p>
 				</div>
 			</div>
+			
+			<?php if (!$this->ion_auth->logged_in()) { ?>
+			<!-- Create Account Section for Guests -->
+			<div class="row">
+				<div class="col-lg-12">
+					<hr>
+					<div class="alert alert-info">
+						<h4><i class="fa fa-user"></i> Buat Akun untuk Kemudahan Tracking Booking</h4>
+						<p>Dengan membuat akun, Anda dapat:</p>
+						<ul>
+							<li>Melihat riwayat semua booking Anda</li>
+							<li>Tracking status pembayaran dan booking dengan mudah</li>
+							<li>Checkout lebih cepat di booking berikutnya</li>
+							<li>Mendapatkan notifikasi status booking via email</li>
+						</ul>
+						<a href="<?php echo base_url('auth/register') ?>" class="btn btn-primary">
+							<i class="fa fa-user-plus"></i> Daftar Sekarang
+						</a>
+						<a href="<?php echo base_url('auth/login') ?>" class="btn btn-success">
+							<i class="fa fa-sign-in"></i> Login
+						</a>
+						<hr>
+						<p><small>Sudah punya akun dengan email yang sama? Login untuk melihat semua booking Anda!</small></p>
+					</div>
+					<div class="alert alert-warning">
+						<h4><i class="fa fa-search"></i> Tracking Booking untuk Guest</h4>
+						<p>Anda dapat melakukan tracking status booking dengan memasukkan Email dan Kode Booking Anda.</p>
+						<a href="<?php echo base_url('cart/track_booking') ?>" class="btn btn-warning">
+							<i class="fa fa-search"></i> Track Booking Saya
+						</a>
+					</div>
+				</div>
+			</div>
+			<?php } ?>
+			
 	  </div>
   </div>
 </div>

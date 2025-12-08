@@ -9,7 +9,7 @@
 	</ol>
 
 	<div class="row">
-		<div class="col-md-8"><h1>ALBUM: <?php echo strtoupper(clean2(ucfirst($this->uri->segment(3)))) ?></h1><hr>
+		<div class="col-md-12"><h1>ALBUM: <?php echo strtoupper(clean2(ucfirst($this->uri->segment(3)))) ?></h1><hr>
 			<div class="row">
 				<?php foreach($album_detail as $foto){ ?>
 	        <div class="col-md-4">
@@ -27,15 +27,13 @@
 							</div>
 						</div>
 					</div>
-				<?php } ?>
-			</div>
+			<?php } ?>
 		</div>
-		<?php $this->load->view('front/sidebar'); ?>
 	</div>
+	<?php /* $this->load->view('front/sidebar'); */ ?>
 </div>
-<?php $this->load->view('front/footer'); ?>
-
-<script type="text/javascript">
+</div>
+<?php $this->load->view('front/footer'); ?><script type="text/javascript">
 $(function() {
 		$('img').on('click', function() {
 		$('.enlargeImageModalSource').attr('src', $(this).attr('src'));

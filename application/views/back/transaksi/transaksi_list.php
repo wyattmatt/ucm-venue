@@ -38,7 +38,16 @@
                       <tr>
                         <td style="text-align:center"><?php echo $no++ ?></td>
                         <td style="text-align:center"><?php echo $data->id_invoice ?></a></td>
-                        <td style="text-align:center"><?php echo $data->name ?></a></td>
+                        <td style="text-align:center">
+                          <?php 
+                            // Display guest name if user_id is NULL, otherwise display registered user name
+                            if ($data->user_id == NULL) {
+                              echo $data->guest_name . ' <span class="label label-info">Guest</span>';
+                            } else {
+                              echo $data->name;
+                            }
+                          ?>
+                        </td>
       									<td style="text-align:center"><?php echo tgl_indo($data->created_date) ?></td>
       									<td style="text-align:center"><?php echo number_format($data->grand_total) ?></a></td>
       									<td style="text-align:center">

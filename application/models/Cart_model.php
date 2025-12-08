@@ -19,13 +19,15 @@ class Cart_model extends CI_Model
   // BACKEND //
   function get_all()
   {
-    $this->db->join('users', 'transaksi.user_id = users.id');
+    $this->db->select('transaksi.*, users.id, users.name, users.email');
+    $this->db->join('users', 'transaksi.user_id = users.id', 'left');
     return $this->db->get($this->table)->result();
   }
 
   function top5_transaksi()
   {
-    $this->db->join('users', 'transaksi.user_id = users.id');
+    $this->db->select('transaksi.*, users.id, users.name, users.email');
+    $this->db->join('users', 'transaksi.user_id = users.id', 'left');
     $this->db->limit(5);
     $this->db->order_by('transaksi.id_trans', 'DESC');
     return $this->db->get($this->table)->result();
@@ -36,15 +38,19 @@ class Cart_model extends CI_Model
     $this->db->select('
     lapangan.id_lapangan, lapangan.nama_lapangan,
     transaksi.id_trans, transaksi.id_invoice, transaksi.user_id, transaksi.subtotal, transaksi.diskon, transaksi.grand_total, transaksi.deadline, transaksi.status, transaksi.catatan, transaksi.created_date,
+    transaksi.guest_name, transaksi.guest_email, transaksi.guest_phone, transaksi.guest_address, transaksi.guest_province_id, transaksi.guest_city_id,
     transaksi_detail.trans_id, transaksi_detail.lapangan_id, transaksi_detail.tanggal, transaksi_detail.jam_mulai, transaksi_detail.durasi, transaksi_detail.jam_selesai, transaksi_detail.harga_jual, transaksi_detail.total,
-    provinsi.nama_provinsi,kota.nama_kota,
+    provinsi.nama_provinsi, guest_provinsi.nama_provinsi as guest_nama_provinsi,
+    kota.nama_kota, guest_kota.nama_kota as guest_nama_kota,
     users.id, users.name, users.address
     ');
     $this->db->join('lapangan', 'transaksi_detail.lapangan_id = lapangan.id_lapangan');
     $this->db->join('transaksi', 'transaksi_detail.trans_id = transaksi.id_trans');
-    $this->db->join('users', 'transaksi.user_id = users.id');
-    $this->db->join('provinsi', 'provinsi.id_provinsi = users.provinsi');
-    $this->db->join('kota', 'kota.id_kota = users.kota');
+    $this->db->join('users', 'transaksi.user_id = users.id', 'left');
+    $this->db->join('provinsi', 'provinsi.id_provinsi = users.provinsi', 'left');
+    $this->db->join('kota', 'kota.id_kota = users.kota', 'left');
+    $this->db->join('provinsi as guest_provinsi', 'guest_provinsi.id_provinsi = transaksi.guest_province_id', 'left');
+    $this->db->join('kota as guest_kota', 'guest_kota.id_kota = transaksi.guest_city_id', 'left');
     $this->db->where('transaksi.id_trans',$id);
     return $this->db->get($this->table2);
   }
@@ -62,15 +68,28 @@ class Cart_model extends CI_Model
   function total_cart_navbar()
   {
     $this->db->join('transaksi_detail', 'transaksi.id_trans = transaksi_detail.trans_id');
-    $this->db->where('user_id', $this->session->userdata('user_id'));
+    
+    // Support both logged-in users and guests
+    if ($this->session->userdata('user_id')) {
+      $this->db->where('user_id', $this->session->userdata('user_id'));
+    } else {
+      $this->db->where('session_id', session_id());
+    }
+    
     $this->db->where('status','0');
     return $this->db->get($this->table)->num_rows();
   }
 
-  // cek transaksi per customer login
+  // cek transaksi per customer login or guest
   function cek_transaksi()
   {
-    $this->db->where('user_id', $this->session->userdata('user_id'));
+    // Support both logged-in users and guests
+    if ($this->session->userdata('user_id')) {
+      $this->db->where('user_id', $this->session->userdata('user_id'));
+    } else {
+      $this->db->where('session_id', session_id());
+    }
+    
     $this->db->where('status','0');
     return $this->db->get($this->table)->row();
   }
@@ -79,19 +98,32 @@ class Cart_model extends CI_Model
   {
     $this->db->join('transaksi_detail', 'transaksi.id_trans = transaksi_detail.trans_id');
     $this->db->where('lapangan_id',$id);
-    $this->db->where('user_id', $this->session->userdata('user_id'));
+    
+    // Support both logged-in users and guests
+    if ($this->session->userdata('user_id')) {
+      $this->db->where('user_id', $this->session->userdata('user_id'));
+    } else {
+      $this->db->where('session_id', session_id());
+    }
+    
     $this->db->where('status','0');
     return $this->db->get($this->table)->row();
   }
 
-  // ambil semua data dari 4 tabel per customer
+  // ambil semua data dari 4 tabel per customer (logged-in or guest)
   function get_cart_per_customer()
   {
-    // $this->db->join('lapangan', 'transaksi_detail.lapangan_id = lapangan.id_lapangan');
     $this->db->join('lapangan', 'transaksi_detail.lapangan_id = lapangan.id_lapangan');
     $this->db->join('transaksi', 'transaksi_detail.trans_id = transaksi.id_trans');
-    $this->db->join('users', 'transaksi.user_id = users.id');
-    $this->db->where('transaksi.user_id', $this->session->userdata('user_id'));
+    $this->db->join('users', 'transaksi.user_id = users.id', 'left'); // LEFT JOIN for guests
+    
+    // Support both logged-in users and guests
+    if ($this->session->userdata('user_id')) {
+      $this->db->where('transaksi.user_id', $this->session->userdata('user_id'));
+    } else {
+      $this->db->where('transaksi.session_id', session_id());
+    }
+    
     $this->db->where('status','0');
     return $this->db->get($this->table2);
   }
@@ -100,15 +132,23 @@ class Cart_model extends CI_Model
   {
     $this->db->select('
     lapangan.id_lapangan, lapangan.nama_lapangan,
-    transaksi.id_trans, transaksi.id_invoice, transaksi.user_id, transaksi.subtotal, transaksi.diskon, transaksi.grand_total, transaksi.deadline, transaksi.status, transaksi.catatan,
+    transaksi.id_trans, transaksi.id_invoice, transaksi.user_id, transaksi.session_id, transaksi.subtotal, transaksi.diskon, transaksi.grand_total, transaksi.deadline, transaksi.status, transaksi.catatan,
     transaksi_detail.trans_id, transaksi_detail.lapangan_id, transaksi_detail.tanggal, transaksi_detail.jam_mulai, transaksi_detail.durasi, transaksi_detail.jam_selesai, transaksi_detail.harga_jual, transaksi_detail.total,
     users.id
     ');
     $this->db->join('lapangan', 'transaksi_detail.lapangan_id = lapangan.id_lapangan');
     $this->db->join('transaksi', 'transaksi_detail.trans_id = transaksi.id_trans');
-    $this->db->join('users', 'transaksi.user_id = users.id');
-    $this->db->where('transaksi.id_trans',$id);
-    $this->db->where('transaksi.user_id', $this->session->userdata('user_id'));
+    $this->db->join('users', 'transaksi.user_id = users.id', 'left'); // Left join for guests
+    $this->db->where('transaksi.id_trans', $id);
+    
+    // Check if user is logged in
+    if ($this->session->userdata('user_id')) {
+      $this->db->where('transaksi.user_id', $this->session->userdata('user_id'));
+    } else {
+      // For guest users, use session_id
+      $this->db->where('transaksi.session_id', session_id());
+    }
+    
     $this->db->order_by('transaksi.id_trans', 'DESC');
     return $this->db->get($this->table2);
   }
@@ -116,7 +156,15 @@ class Cart_model extends CI_Model
   function get_cart_per_customer_latest()
   {
     $this->db->select('id_trans');
-    $this->db->where('user_id', $this->session->userdata('user_id'));
+    
+    // Check if user is logged in
+    if ($this->session->userdata('user_id')) {
+      $this->db->where('user_id', $this->session->userdata('user_id'));
+    } else {
+      // For guest users, use session_id
+      $this->db->where('session_id', session_id());
+    }
+    
     $this->db->limit('1');
     $this->db->order_by('id_trans', 'DESC');
     return $this->db->get($this->table)->row();
@@ -403,6 +451,22 @@ class Cart_model extends CI_Model
     $this->db->where('status','2');
 		$query = $this->db->get($this->table);
     return $query->row()->subtotal;
+  }
+  
+  // Guest booking tracking methods
+  public function get_booking_by_email_code($email, $booking_code)
+  {
+    $this->db->where('guest_email', $email);
+    $this->db->where('id_invoice', $booking_code);
+    return $this->db->get($this->table)->row();
+  }
+  
+  public function get_booking_details($trans_id)
+  {
+    $this->db->select('lapangan.nama_lapangan, transaksi_detail.*');
+    $this->db->join('lapangan', 'transaksi_detail.lapangan_id = lapangan.id_lapangan');
+    $this->db->where('trans_id', $trans_id);
+    return $this->db->get($this->table2)->result();
   }
 
 }

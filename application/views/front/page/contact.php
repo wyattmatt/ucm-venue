@@ -9,7 +9,7 @@
 	</ol>
 
 	<div class="row">
-		<div class="col-md-8"><h1>HUBUNGI KAMI</h1><hr>
+		<div class="col-md-12"><h1>HUBUNGI KAMI</h1><hr>
 			<?php echo validation_errors() ?>
 			<?php if($this->session->flashdata('message')){echo $this->session->flashdata('message');} ?>
 			<?php echo form_open('send',array('id'=>'contactForm')) ?>
@@ -33,10 +33,10 @@
 						<?php echo form_textarea($message) ?>
 					</div>
 				</div>
-				<button type="submit" id="submit" class="btn btn-sm btn-primary" style="pointer-events: all; cursor: pointer;">Kirim</button>
-			<?php echo form_close() ?>
-		</div>
-		<?php $this->load->view('front/sidebar'); ?>
+			<button type="submit" id="submit" class="btn btn-sm btn-primary" style="pointer-events: all; cursor: pointer;">Kirim</button>
+		<?php echo form_close() ?>
 	</div>
+	<?php /* $this->load->view('front/sidebar'); */ ?>
+</div>
 </div>
 <?php $this->load->view('front/footer'); ?>

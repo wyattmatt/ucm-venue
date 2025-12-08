@@ -4,12 +4,12 @@
 <div class="container">
 	<ol class="breadcrumb">
 		<li><a href="<?php echo base_url() ?>">Home</a></li>
-		<li><a href="#">Event</a></li>
-		<li class="active">Semua Event</li>
+		<li><a href="#">Events</a></li>
+		<li class="active">Semua Events</li>
 	</ol>
 
 	<div class="row">
-		<div class="col-md-8"><h1>SEMUA EVENT</h1><hr>
+		<div class="col-md-12"><h1>SEMUA EVENTS</h1><hr>
 			<?php foreach($event_all as $event){ ?>
 				<h2><a href="<?php echo base_url('event/').$event->slug_event ?>"><?php echo $event->nama_event ?></a></h2>
 				<a href="<?php echo base_url("event/$event->slug_event ") ?>">
@@ -24,10 +24,10 @@
 				</p>
 				<p><?php echo character_limiter($event->deskripsi,350) ?></p>
 				<a class="btn btn-sm btn-primary" href="<?php echo base_url("event/$event->slug_event ") ?>">Selengkapnya <i class="fa fa-angle-right"></i></a>
-			<?php } ?>
-			<div align="center"><?php echo $this->pagination->create_links() ?></div>
-		</div>
-		<?php $this->load->view('front/sidebar'); ?>
+		<?php } ?>
+		<div align="center"><?php echo $this->pagination->create_links() ?></div>
 	</div>
+	<?php /* $this->load->view('front/sidebar'); */ ?>
+</div>
 </div>
 <?php $this->load->view('front/footer'); ?>

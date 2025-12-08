@@ -16,4 +16,24 @@
     <link href="<?php echo base_url()?>assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Favicon -->
     <link rel="shortcut icon" href="<?php echo base_url('assets/images/fav.png') ?>" />
+    
+    <!-- Sticky Footer CSS -->
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .container {
+        flex: 1 0 auto;
+      }
+      footer {
+        flex-shrink: 0;
+        margin-top: auto;
+      }
+    </style>
   </head>

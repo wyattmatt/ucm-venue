@@ -1,4 +1,4 @@
-<hr><h3 align="center"><b>FASILITAS KAMI</b></h3><hr>
+<hr><h3 align="center"><b>VENUES</b></h3><hr>
 <div class="row">
   <?php foreach($lapangan_new as $lapangan){ ?>
     <div class="col-lg-4">

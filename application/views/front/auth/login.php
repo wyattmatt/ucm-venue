@@ -27,7 +27,7 @@
 							<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 						</div>
 						<p><?php echo $captcha ?></p>
-						<?php echo lang('login_remember_label', 'remember');?>
+						<label for="remember">Remember Me</label>
 						<?php echo form_checkbox('remember', '1', FALSE, 'id="remember"');?> | <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#pswreset">Lupa Password?</button>
 						<hr>
 						<div class="form-group">

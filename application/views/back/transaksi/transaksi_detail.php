@@ -41,8 +41,29 @@
         <div class="col-sm-4 invoice-col">
           Kepada
           <address>
-            <strong><?php echo $cart_finished_row->name ?? 'N/A' ?></strong><br>
-            <?php echo ($cart_finished_row->address ?? '') . ', ' . ($cart_finished_row->nama_kota ?? '') . ', ' . ($cart_finished_row->nama_provinsi ?? '') ?>
+            <strong>
+              <?php 
+                // Display guest name if user_id is NULL, otherwise display registered user name
+                if ($cart_finished_row->user_id == NULL) {
+                  echo $cart_finished_row->guest_name . ' <span class="label label-info">Guest</span>';
+                } else {
+                  echo $cart_finished_row->name ?? 'N/A';
+                }
+              ?>
+            </strong><br>
+            <?php 
+              if ($cart_finished_row->user_id == NULL) {
+                // Guest address
+                echo ($cart_finished_row->guest_address ?? '') . '<br>' . 
+                     ($cart_finished_row->guest_nama_kota ?? '') . ', ' . 
+                     ($cart_finished_row->guest_nama_provinsi ?? '');
+              } else {
+                // Registered user address
+                echo ($cart_finished_row->address ?? '') . '<br>' . 
+                     ($cart_finished_row->nama_kota ?? '') . ', ' . 
+                     ($cart_finished_row->nama_provinsi ?? '');
+              }
+            ?>
           </address>
         </div><!-- /.col -->
         <div class="col-sm-4 invoice-col">
@@ -137,7 +158,7 @@
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-          <a href="javascript:window.print()" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+          <button onclick="window.print()" class="btn btn-default"><i class="fa fa-print"></i> Print</button>
         </div>
       </div>
     </section><!-- /.content -->

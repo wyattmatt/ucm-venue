@@ -5,7 +5,14 @@
     <?php foreach($slider_data as $slider){ ?>
     <li>
       <a href="<?php echo $slider->link ?>" target="_self">
-        <img src="<?php echo base_url('assets/images/slider/').$slider->foto.$slider->foto_type?>" alt="<?php echo $slider->nama_slider ?>">
+        <?php 
+        $video_types = array('.mp4', '.webm');
+        if (in_array(strtolower($slider->foto_type), $video_types)) {
+          echo '<video src="'.base_url('assets/images/slider/'.$slider->foto.$slider->foto_type).'" style="width: 100%; height: 700px;" autoplay muted loop playsinline></video>';
+        } else {
+          echo '<img src="'.base_url('assets/images/slider/'.$slider->foto.$slider->foto_type).'" alt="'.$slider->nama_slider.'">';
+        }
+        ?>
       </a>
     </li>
     <?php } ?>

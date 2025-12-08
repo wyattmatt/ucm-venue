@@ -22,9 +22,8 @@
     </b>
   </div>
 
-  <?php if($this->session->userdata('user_id') != NULL){ ?>
-    <table>
-      <thead>
+  <table>
+    <thead>
         <tr>
           <th style="text-align: center; background: #ddd; width: 30px">No.</th>
           <th style="text-align: center; background: #ddd; width: 130px">Nama Lapangan</th>
@@ -106,8 +105,6 @@
       <li>Kami akan segera memproses pemesanan Anda setelah mendapatkan konfirmasi pembayaran segera mungkin.</li>
 		</ul>
 		<p align="center"><b>~ Terima Kasih ~</b></p>
-
-  <?php } ?>
 
 </body>
 </html><!-- Akhir halaman HTML yang akan di konvert -->

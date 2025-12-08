@@ -43,7 +43,16 @@
                         <tr>
                           <td style="text-align: center"><?php echo $no++ ?></td>
                           <td style="text-align: center"><?php echo $data->nama_slider ?></td>
-                          <td style="text-align: center"><img src="<?php echo base_url('assets/images/slider/').$data->foto.$data->foto_type ?>" width="300px"></td>
+                          <td style="text-align: center">
+                            <?php 
+                            $video_types = array('.mp4', '.webm');
+                            if (in_array(strtolower($data->foto_type), $video_types)) {
+                              echo '<video src="'.base_url('assets/images/slider/'.$data->foto.$data->foto_type).'" width="300px" controls></video>';
+                            } else {
+                              echo '<img src="'.base_url('assets/images/slider/'.$data->foto.$data->foto_type).'" width="300px">';
+                            }
+                            ?>
+                          </td>
                           <td style="text-align: center"><?php echo $data->link ?></td>
                           <td style="text-align: center"><?php echo $data->created_by ?></td>
                           <td style="text-align: center"><?php echo $data->created_at ?></td>

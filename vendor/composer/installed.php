@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => '__root__',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '2b2631990d769ac0d209556a6aab65c7a8f81dc1',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,18 +11,18 @@
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '2b2631990d769ac0d209556a6aab65c7a8f81dc1',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'spipu/html2pdf' => array(
-            'pretty_version' => 'v5.2.5',
-            'version' => '5.2.5.0',
-            'reference' => 'c002749cf21733d53fb9e50d082ca3d1bde06c85',
+            'pretty_version' => 'v5.2.8',
+            'version' => '5.2.8.0',
+            'reference' => '6c94dcd48c94c6c73f206629839c1ebd81e8c726',
             'type' => 'library',
             'install_path' => __DIR__ . '/../spipu/html2pdf',
             'aliases' => array(),

@@ -46,7 +46,7 @@
 					<div class="col-sm-6"><label>Provinsi</label>
 						<?php echo form_dropdown('',$ambil_provinsi,$user->provinsi,$provinsi_id);?><br>
 					</div>
-					<div class="col-sm-6"><label>Kabupaten/ Kota</label>
+					<div class="col-sm-6"><label>Kabupaten/Kota</label>
 						<?php echo form_dropdown('',$ambil_kota,$user->kota,$kota_id);?><br>
 					</div>
 				</div>
