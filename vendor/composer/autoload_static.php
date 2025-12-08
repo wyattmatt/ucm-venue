@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitadc3c21f0c2f3a68b1c345a61a27b0d5
+class ComposerStaticInitc5e4dce38859cfa3fcdfe1c976dcf5f4
 {
     public static $prefixLengthsPsr4 = array (
         'S' =>
@@ -33,17 +33,15 @@ class ComposerStaticInitadc3c21f0c2f3a68b1c345a61a27b0d5
         'TCPDF_FONTS' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_fonts.php',
         'TCPDF_FONT_DATA' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_font_data.php',
         'TCPDF_IMAGES' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_images.php',
-        'TCPDF_IMPORT' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_import.php',
-        'TCPDF_PARSER' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_parser.php',
         'TCPDF_STATIC' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_static.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitadc3c21f0c2f3a68b1c345a61a27b0d5::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitadc3c21f0c2f3a68b1c345a61a27b0d5::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitadc3c21f0c2f3a68b1c345a61a27b0d5::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc5e4dce38859cfa3fcdfe1c976dcf5f4::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc5e4dce38859cfa3fcdfe1c976dcf5f4::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitc5e4dce38859cfa3fcdfe1c976dcf5f4::$classMap;
 
         }, null, ClassLoader::class);
     }

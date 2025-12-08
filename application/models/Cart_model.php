@@ -132,7 +132,7 @@ class Cart_model extends CI_Model
   {
     $this->db->select('
     lapangan.id_lapangan, lapangan.nama_lapangan,
-    transaksi.id_trans, transaksi.id_invoice, transaksi.user_id, transaksi.session_id, transaksi.subtotal, transaksi.diskon, transaksi.grand_total, transaksi.deadline, transaksi.status, transaksi.catatan,
+    transaksi.id_trans, transaksi.id_invoice, transaksi.user_id, transaksi.session_id, transaksi.subtotal, transaksi.diskon, transaksi.grand_total, transaksi.deadline, transaksi.status, transaksi.catatan, transaksi.created_date, transaksi.created_time,
     transaksi_detail.trans_id, transaksi_detail.lapangan_id, transaksi_detail.tanggal, transaksi_detail.jam_mulai, transaksi_detail.durasi, transaksi_detail.jam_selesai, transaksi_detail.harga_jual, transaksi_detail.total,
     users.id
     ');
