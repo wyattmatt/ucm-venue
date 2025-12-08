@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 28, 2025 at 09:43 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost
+-- Generation Time: Dec 08, 2025 at 07:03 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `futsal`
+-- Database: `ucm_venue`
 --
 
 -- --------------------------------------------------------
@@ -206,8 +206,8 @@ CREATE TABLE `jam` (
 --
 
 INSERT INTO `jam` (`id`, `jam`, `is_available`) VALUES
-(1, '06:00:00', 1),
-(2, '07:00:00', 1),
+(1, '06:00:00', 0),
+(2, '07:00:00', 0),
 (3, '08:00:00', 1),
 (4, '09:00:00', 1),
 (5, '10:00:00', 1),
@@ -222,9 +222,9 @@ INSERT INTO `jam` (`id`, `jam`, `is_available`) VALUES
 (14, '19:00:00', 1),
 (15, '20:00:00', 1),
 (16, '21:00:00', 1),
-(17, '22:00:00', 1),
-(18, '23:00:00', 1),
-(19, '24:00:00', 1);
+(17, '22:00:00', 0),
+(18, '23:00:00', 0),
+(19, '24:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -271,9 +271,9 @@ CREATE TABLE `kontak` (
 --
 
 INSERT INTO `kontak` (`id_kontak`, `nama_kontak`, `nohp`, `created_by`, `created_at`, `modified_by`, `modified_at`) VALUES
-(1, 'MNA', '628112500228', 'wyattmatt', '2018-07-23 11:16:57', 'wyattmatt', '2025-10-28 12:30:44'),
-(2, 'BMA', '6281244119808', 'wyattmatt', '2018-07-23 11:16:57', 'wyattmatt', '2025-10-28 12:31:20'),
-(3, 'ICT', '6281351752727', 'wyattmatt', '2018-07-23 11:20:44', 'wyattmatt', '2025-10-28 12:33:14');
+(1, 'Arya', '6281355957306', 'wyattmatt', '2018-07-23 11:16:57', 'wyattmatt', '2025-12-01 15:08:00'),
+(2, 'Dylon', '6285191551695', 'wyattmatt', '2018-07-23 11:16:57', 'wyattmatt', '2025-12-01 15:08:55'),
+(3, 'Fatir', '6281241622427', 'wyattmatt', '2018-07-23 11:20:44', 'wyattmatt', '2025-12-01 15:08:59');
 
 -- --------------------------------------------------------
 
@@ -937,9 +937,7 @@ CREATE TABLE `slider` (
 --
 
 INSERT INTO `slider` (`id_slider`, `no_urut`, `nama_slider`, `link`, `foto`, `foto_type`, `foto_size`, `created_at`, `created_by`, `modified_at`, `modified_by`) VALUES
-(1, 1, 'Lapangan Basket', 'https://www.ciputramakassar.ac.id/fasilitas-kampus/', 'lapbas_ucm', '.png', 893, '2017-11-25 08:05:03', 'wyattmatt', '2025-10-28 15:37:21', 'wyattmatt'),
-(2, 2, 'Perpustakaan', 'https://www.ciputramakassar.ac.id/fasilitas-kampus/', 'perpus_ucm', '.jpg', 89, '2017-11-25 08:05:03', 'wyattmatt', '2025-10-28 15:37:13', 'wyattmatt'),
-(3, 3, 'Auditorium', 'https://www.ciputramakassar.ac.id/fasilitas-kampus/', 'auditorium_ucm', '.jpg', 161, '2017-11-25 08:05:03', 'wyattmatt', '2025-10-28 15:36:56', 'wyattmatt');
+(1, 1, 'Fasilitas UC Makassar', 'https://www.ciputramakassar.ac.id/fasilitas-kampus/', 'uc_pm_fasilitas', '.webm', 298, '2017-11-25 08:05:03', 'wyattmatt', '2025-12-08 13:24:51', 'superadmin');
 
 -- --------------------------------------------------------
 
@@ -963,7 +961,14 @@ CREATE TABLE `subscriber` (
 CREATE TABLE `transaksi` (
   `id_trans` int(11) NOT NULL,
   `id_invoice` char(15) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `guest_name` varchar(255) DEFAULT NULL,
+  `guest_email` varchar(255) DEFAULT NULL,
+  `guest_phone` varchar(50) DEFAULT NULL,
+  `guest_address` text DEFAULT NULL,
+  `guest_province_id` int(11) DEFAULT NULL,
+  `guest_city_id` int(11) DEFAULT NULL,
+  `session_id` varchar(255) DEFAULT NULL,
   `subtotal` int(11) NOT NULL,
   `diskon` int(11) NOT NULL,
   `grand_total` int(11) NOT NULL,
@@ -978,18 +983,19 @@ CREATE TABLE `transaksi` (
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`id_trans`, `id_invoice`, `user_id`, `subtotal`, `diskon`, `grand_total`, `deadline`, `catatan`, `status`, `created_date`, `created_time`) VALUES
-(1, 'J-251021-0001', 3, 100000, 0, 100000, '2025-10-21 21:03:57', '', 2, '2025-10-21', '08:03:19'),
-(2, 'J-251017-0002', 4, 260000, 50000, 210000, '2025-10-17 21:10:50', 'takada', 2, '2025-10-17', '08:09:54'),
-(3, 'J-251016-0003', 3, 300000, 0, 300000, '2025-10-16 21:20:17', '', 2, '2025-10-16', '08:20:09'),
-(4, 'J-251008-0001', 3, 330000, 0, 330000, '2025-10-08 21:21:53', '', 2, '2025-10-08', '08:21:35'),
-(5, 'J-251008-0002', 3, 150000, 0, 150000, '2025-10-08 21:22:35', '', 2, '2025-10-08', '08:22:29'),
-(6, 'J-251008-0003', 3, 300000, 0, 300000, '2025-10-08 21:23:15', '', 2, '2025-10-08', '08:23:09'),
-(7, 'J-251010-0004', 3, 300000, 0, 300000, '2025-10-10 21:24:07', '', 2, '2025-10-10', '08:23:52'),
-(8, 'J-251017-0003', 3, 150000, 0, 150000, '2025-10-17 21:23:05', '', 1, '2025-10-17', '08:23:01'),
-(9, 'J-251021-0001', 3, 160000, 0, 160000, '2025-10-21 12:53:34', '', 2, '2025-10-21', '08:25:51'),
-(10, 'J-251021-0002', 3, 80000, 0, 80000, '2025-10-21 12:56:25', '', 1, '2025-10-21', '11:55:17'),
-(11, 'J-251021-0003', 3, 0, 0, 0, '0000-00-00 00:00:00', '', 0, '2025-10-21', '11:56:29');
+INSERT INTO `transaksi` (`id_trans`, `id_invoice`, `user_id`, `guest_name`, `guest_email`, `guest_phone`, `guest_address`, `guest_province_id`, `guest_city_id`, `session_id`, `subtotal`, `diskon`, `grand_total`, `deadline`, `catatan`, `status`, `created_date`, `created_time`) VALUES
+(1, 'J-251021-0001', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 100000, 0, 100000, '2025-10-21 21:03:57', '', 2, '2025-10-21', '08:03:19'),
+(2, 'J-251017-0002', 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 260000, 50000, 210000, '2025-10-17 21:10:50', 'takada', 2, '2025-10-17', '08:09:54'),
+(3, 'J-251016-0003', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 300000, 0, 300000, '2025-10-16 21:20:17', '', 2, '2025-10-16', '08:20:09'),
+(4, 'J-251008-0001', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 330000, 0, 330000, '2025-10-08 21:21:53', '', 2, '2025-10-08', '08:21:35'),
+(5, 'J-251008-0002', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 150000, 0, 150000, '2025-10-08 21:22:35', '', 2, '2025-10-08', '08:22:29'),
+(6, 'J-251008-0003', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 300000, 0, 300000, '2025-10-08 21:23:15', '', 2, '2025-10-08', '08:23:09'),
+(7, 'J-251010-0004', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 300000, 0, 300000, '2025-10-10 21:24:07', '', 2, '2025-10-10', '08:23:52'),
+(8, 'J-251017-0003', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 150000, 0, 150000, '2025-10-17 21:23:05', '', 1, '2025-10-17', '08:23:01'),
+(9, 'J-251021-0001', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 160000, 0, 160000, '2025-10-21 12:53:34', '', 2, '2025-10-21', '08:25:51'),
+(10, 'J-251021-0002', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 80000, 0, 80000, '2025-10-21 12:56:25', '', 1, '2025-10-21', '11:55:17'),
+(11, 'J-251021-0003', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1150000, 0, 1150000, '2025-12-01 16:51:28', '', 1, '2025-10-21', '11:56:29'),
+(12, 'J-251208-0001', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, '0000-00-00 00:00:00', '', 0, '2025-12-08', '12:54:31');
 
 -- --------------------------------------------------------
 
@@ -1028,7 +1034,8 @@ INSERT INTO `transaksi_detail` (`id_transdet`, `trans_id`, `lapangan_id`, `tangg
 (11, 8, 2, '2021-05-18', '10:00:00', 1, '11:00:00', 150000, 150000, '2021-05-17 20:23:01'),
 (13, 9, 3, '2025-10-21', '17:00:00', 2, '19:00:00', 80000, 160000, '2025-10-21 12:53:09'),
 (14, 10, 3, '2025-10-21', '19:00:00', 1, '20:00:00', 80000, 80000, '2025-10-21 12:55:17'),
-(16, 11, 6, '0000-00-00', NULL, 0, NULL, 150000, 150000, '2025-10-21 12:56:43');
+(16, 11, 6, '2025-12-09', '12:00:00', 5, '17:00:00', 150000, 750000, '2025-10-21 12:56:43'),
+(17, 11, 4, '2025-12-03', '08:00:00', 4, '12:00:00', 100000, 400000, '2025-12-01 16:50:40');
 
 -- --------------------------------------------------------
 
@@ -1066,9 +1073,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `password`, `email`, `phone`, `provinsi`, `kota`, `address`, `usertype`, `active`, `photo`, `photo_type`, `ip_address`, `salt`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `last_login`, `created_on`, `modified`) VALUES
-(1, 'SuperAdmin', 'superadmin', '$2y$08$TWMdtdacqPE5yEz9n1LwFuhEVmiDTTsupl12M45tCQihzF1tu2N/6', 'superadmin@gmail.com', '081228289766', 6, 151, 'asdasdasdsa', 1, 1, 'mazmi20180205001726', '.jpg', '::1', NULL, 'c6ad242e6fd3de875568c7de5ba23af4a24137ef', 'tHafW45duPzrU3oWR0AVuO48b26088a3cd65edc4', 1621246176, NULL, 1761617472, 2147483647, '2025-10-28 10:11:12'),
+(1, 'SuperAdmin', 'superadmin', '$2y$08$TWMdtdacqPE5yEz9n1LwFuhEVmiDTTsupl12M45tCQihzF1tu2N/6', 'superadmin@gmail.com', '081228289766', 6, 151, 'asdasdasdsa', 1, 1, 'mazmi20180205001726', '.jpg', '::1', NULL, 'c6ad242e6fd3de875568c7de5ba23af4a24137ef', 'tHafW45duPzrU3oWR0AVuO48b26088a3cd65edc4', 1621246176, NULL, 1765173597, 2147483647, '2025-12-08 13:59:57'),
 (2, 'Admin', 'administrator', '$2y$08$rnCngWyQhFLdVJijctNDKuwJZ8o9VfcSsZ9IM9XN71ugxIpQFeCWe', 'administrator@gmail.com', '08124124', NULL, NULL, 'kaldjlas', 2, 1, 'admin20180424102408', '.jpeg', '::1', NULL, NULL, NULL, NULL, NULL, 1621252084, 1524551716, '2021-05-17 18:48:04'),
-(3, 'Batistuta', 'batistuta', '$2y$08$.5EYrM8S8Up0LcpFiEmjauyPVdWOmylLZ.MqM0zBKyDVKniwdVbYi', 'batistuta@gmail.com', '0812412414', 33, 327, 'Jl. Skdlajsdlasjkdl', 4, 1, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, 1761022513, 1528634033, '2025-10-21 12:55:13'),
+(3, 'Batistuta', 'batistuta', '$2y$08$.5EYrM8S8Up0LcpFiEmjauyPVdWOmylLZ.MqM0zBKyDVKniwdVbYi', 'batistuta@gmail.com', '0812412414', 33, 327, 'Jl. Skdlajsdlasjkdl', 4, 1, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, 1764579036, 1528634033, '2025-12-01 16:50:36'),
 (4, 'User Premium', 'userpremium', '$2y$08$Wv3MA.DnwTNzBeF62o9neuSXeVdIA/bjlxOzSxtD6DtgStEBn//s.', 'userpremium@gmail.com', '0812412412', 3, 106, 'kaljdklasjdkl', 3, 1, NULL, NULL, '::1', NULL, NULL, NULL, NULL, NULL, 1761018519, 1531807819, '2025-10-21 11:48:39');
 
 -- --------------------------------------------------------
@@ -1186,7 +1193,9 @@ ALTER TABLE `subscriber`
 --
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`id_trans`),
-  ADD KEY `transaksi_FK` (`user_id`);
+  ADD KEY `transaksi_FK` (`user_id`),
+  ADD KEY `idx_guest_email` (`guest_email`),
+  ADD KEY `idx_session_id` (`session_id`);
 
 --
 -- Indexes for table `transaksi_detail`
@@ -1270,7 +1279,7 @@ ALTER TABLE `lapangan`
 -- AUTO_INCREMENT for table `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `page`
@@ -1294,13 +1303,13 @@ ALTER TABLE `subscriber`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_trans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_trans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `transaksi_detail`
 --
 ALTER TABLE `transaksi_detail`
-  MODIFY `id_transdet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_transdet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `users`
