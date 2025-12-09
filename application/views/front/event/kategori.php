@@ -5,7 +5,7 @@
 	<ol class="breadcrumb">
 		<li><a href="<?php echo base_url() ?>">Home</a></li>
 		<li><a href="#">Events</a></li>
-		<li class="active">Semua Events</li>
+		<li class="active">All Events</li>
 	</ol>
 
 	<div class="row">
@@ -23,7 +23,7 @@
 					<i class="fa fa-calendar"></i> <?php echo date("j F Y", strtotime($kategori->created_at)); ?>
 				</p>
 				<p><?php echo character_limiter($kategori->deskripsi,350) ?></p>
-				<a class="btn btn-sm btn-primary" href="<?php echo base_url("event/$kategori->slug_event ") ?>">Selengkapnya <i class="fa fa-angle-right"></i></a>
+				<a class="btn btn-sm btn-primary" href="<?php echo base_url("event/$kategori->slug_event ") ?>">Read More <i class="fa fa-angle-right"></i></a>
 		<?php } ?>
 		<div align="center"><?php echo $this->pagination->create_links() ?></div>
 	</div>

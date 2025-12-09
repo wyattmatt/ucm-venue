@@ -1,8 +1,9 @@
   <footer style="background-color: #ecf0f1; padding: 40px 0 20px 0; margin-top: 50px; width: 100%;">
   <div class="container">
+    <!-- First Row: Social Media and Contact Us -->
     <div class="row">
-      <!-- Social Media & Facebook Widget -->
-      <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
+      <!-- Social Media -->
+      <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
         <div class="bs-callout bs-callout-primary">
           <h4><i class="fa fa-search"></i> <?php echo $this->lang->line('footer_social_media'); ?></h4>
         </div>
@@ -12,61 +13,59 @@
           <button type="button" class="btn btn-sm btn-primary" onclick="window.open('https://x.com/UCMakassar','_blank')"><i class="fa fa-twitter"></i></button>&nbsp;
           <button type="button" class="btn btn-sm btn-primary" onclick="window.open('https://www.youtube.com/c/UCMakassar','_blank')"><i class="fa fa-youtube-play"></i></button>
         </div>
-        <div class="bs-callout bs-callout-primary mt-3">
-          <h4><i class="fa fa-facebook"></i> Facebook</h4>
-        </div>
-        <div id="fb-root"></div>
-        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId=1079046148857661&autoLogAppEvents=1" nonce="NRs3YdmA"></script>
-        <div class="fb-page" data-href="https://www.facebook.com/UCMakassarOfficial/" data-tabs="timeline" data-width="250" data-height="282" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false">
-          <blockquote cite="https://www.facebook.com/UCMakassarOfficial/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/UCMakassarOfficial/">UCMakassarOfficial</a></blockquote>
-        </div>
       </div>
 
-      <!-- Event Terbaru -->
-      <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
-        <div class="bs-callout bs-callout-primary">
-          <h4><i class="fa fa-newspaper-o"></i> <?php echo $this->lang->line('footer_latest_events'); ?></h4>
-        </div>
-        <ul class="list-group">
-          <?php
-          if (isset($event_sidebar) && is_array($event_sidebar)) {
-            foreach ($event_sidebar as $event_sidebar_item) {
-          ?>
-            <li class="list-group-item">
-              <span class="badge">NEW</span>
-              <?php echo anchor('event/read/' . $event_sidebar_item->slug_event . '', '' . $event_sidebar_item->nama_event . '') ?>
-            </li>
-          <?php 
-            }
-          } else {
-            echo '<li class="list-group-item">' . $this->lang->line('footer_no_events') . '</li>';
-          }
-          ?>
-        </ul>
-      </div>
-
-      <!-- Hubungi Kami -->
-      <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
+      <!-- Contact Us -->
+      <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
         <div class="bs-callout bs-callout-primary">
           <h4><i class="fa fa-phone"></i> <?php echo $this->lang->line('footer_contact_us'); ?></h4>
         </div>
-        <ul class="list-group">
-          <div align="left"><img src="<?php echo base_url('assets/images/wa.jpg') ?>" width="100px" class="img-responsive"></div>
+        <div class="mb-3">
           <?php 
           if (isset($kontak_sidebar) && is_array($kontak_sidebar)) {
             foreach($kontak_sidebar as $kontak){
           ?>
-            <b><?php echo $kontak->nama_kontak ?></b><br>
-            +<?php echo $kontak->nohp ?><br>
-            <a href="https://api.whatsapp.com/send?phone=+<?php echo $kontak->nohp ?>&text=Hai%20Kak%2C%20saya%20mau%20tanya-tanya%20seputar%20informasi%20booking%20tempat%20di%20UC%20Makassar">
-              <button class="btn btn-success btn-sm" type="submit" name="button">Chat via Whatsapp</button>
-            </a><br><br>
+            <a href="https://api.whatsapp.com/send?phone=+<?php echo $kontak->nohp ?>&text=Hai%20Kak%2C%20saya%20mau%20tanya-tanya%20seputar%20informasi%20booking%20tempat%20di%20UC%20Makassar" target="_blank" style="text-decoration: none;">
+              <button class="btn btn-success btn-sm" type="button" style="margin-bottom: 5px;">
+                <i class="fa fa-whatsapp"></i> <?php echo $kontak->nama_kontak ?>
+              </button>
+            </a>
           <?php 
             }
           }
           ?>
-        </ul>
+        </div>
       </div>
+    </div>
+
+    <!-- Second Row: Latest Events -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="bs-callout bs-callout-primary">
+          <h4><i class="fa fa-newspaper-o"></i> <?php echo $this->lang->line('footer_latest_events'); ?></h4>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <?php
+      if (isset($event_sidebar) && is_array($event_sidebar)) {
+        $event_count = 0;
+        foreach ($event_sidebar as $event_sidebar_item) {
+          if ($event_count >= 9) break;
+          $event_count++;
+      ?>
+        <div class="col-lg-4 col-md-4 col-sm-6 mb-3">
+          <div style="background: white; padding: 10px; border-radius: 5px; border: 1px solid #ddd;">
+            <?php echo anchor('event/read/' . $event_sidebar_item->slug_event . '', '' . $event_sidebar_item->nama_event . '') ?>
+            <span class="badge" style="float: right;">NEW</span>
+          </div>
+        </div>
+      <?php 
+        }
+      } else {
+        echo '<div class="col-lg-12"><p>' . $this->lang->line('footer_no_events') . '</p></div>';
+      }
+      ?>
     </div>
 
     <!-- Copyright -->
@@ -76,7 +75,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12 text-center" style="margin-top: 8px;">
+      <div class="col-xs-12 text-center" style="margin-top: 20px;">
         <p>&copy; <?php echo date('Y'); ?> UCM Venue. By <a href="https://wyattmatt.github.io/" target="_blank">WyattMatt</a></p>
       </div>
     </div>

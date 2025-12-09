@@ -11,7 +11,7 @@
           <p class="card-text"><b><?php echo $lapangan->nama_lapangan ?></b></p>
           <hr>
           <a href="<?php echo base_url('cart/buy/').$lapangan->id_lapangan ?>">
-            <button class="btn btn-sm btn-primary"><i class="fa fa-shopping-cart"></i> Booking Sekarang!</button>
+            <button class="btn btn-sm btn-primary"><i class="fa fa-shopping-cart"></i> Booking Now!</button>
           </a>
         </div>
       </div>

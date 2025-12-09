@@ -12,15 +12,21 @@
 		<div class="col-md-12"><h1><?php echo strtoupper($title) ?></h1><hr>
 			<?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
 			<div class="row">
-				<?php foreach($album_all as $album){ ?>
+				<?php foreach($album_all as $lapangan){ ?>
 					<div class="col-lg-6">
-						<h4><a href="#"><?php echo $album->nama_album ?></a></h4>
-						<a href="<?php echo base_url("gallery/read/$album->slug_album") ?>">
+						<div class="thumbnail">
 							<?php
-							if(empty($album->foto)) {echo "<img class='img-responsive' src='".base_url()."assets/images/no_image_thumb.png'>";}
-							else { echo " <img class='img-responsive' src='".base_url()."assets/images/album/".$album->foto."'> ";}
+							if(empty($lapangan->foto)) {echo "<img class='card-img-top' src='".base_url()."assets/images/no_image_thumb.png'>";}
+							else { echo "<img src='".base_url()."assets/images/lapangan/".$lapangan->foto."'> ";}
 							?>
-						</a><br>
+							<div class="caption">
+								<p class="card-text"><b><?php echo $lapangan->nama_lapangan ?></b></p>
+								<hr>
+								<a href="<?php echo base_url('cart/buy/').$lapangan->id_lapangan ?>">
+									<button class="btn btn-sm btn-primary"><i class="fa fa-shopping-cart"></i> Booking Sekarang!</button>
+								</a>
+							</div>
+						</div>
 					</div>
 				<?php } ?>
 			</div>

@@ -21,7 +21,7 @@
           <br>
           <p align="right">
             <a href="<?php echo base_url("event/$event->slug_event") ?>">
-              <button type="button" name="button" class="btn btn-sm btn-success">Selengkapnya</button>
+              <button type="button" name="button" class="btn btn-sm btn-success">Read More</button>
             </a>
           </p>
         </div>

@@ -15,6 +15,7 @@ class Gallery extends CI_Controller {
 		$this->load->model('Foto_model');
 		$this->load->model('Kategori_model');
 		$this->load->model('Kontak_model');
+		$this->load->model('Lapangan_model');
 
 		/* memanggil function dari masing2 model yang akan digunakan */
 		$this->data['company_data'] 			= $this->Company_model->get_by_company();
@@ -32,13 +33,13 @@ class Gallery extends CI_Controller {
 	public function album()
 	{
 		/* menyiapkan data yang akan disertakan/ ditampilkan pada view */
-    $this->data['title'] = "Semua Venues";
+    $this->data['title'] = "All Venues";
 
     /* memanggil library pagination (membuat halaman) */
     $this->load->library('pagination');
 
-    /* menghitung jumlah total data */
-    $jumlah = $this->Album_model->total_rows();
+	/* menghitung jumlah total data */
+    $jumlah = $this->Lapangan_model->count_all();
 
     // Mengatur base_url
     $config['base_url'] = base_url().'gallery/album/halaman/';
@@ -54,16 +55,16 @@ class Gallery extends CI_Controller {
     $config['num_tag_close']    = "</li>";
     $config['cur_tag_open']     = "<li class='disabled'><li class='active'><a href='#'>";
     $config['cur_tag_close']    = "<span class='sr-only'></span></a></li>";
-    $config['next_link']        = "Selanjutnya";
+    $config['next_link']        = "Next";
     $config['next_tag_open']    = "<li>";
     $config['next_tagl_close']  = "</li>";
-    $config['prev_link']        = "Sebelumnya";
+    $config['prev_link']        = "Previous";
     $config['prev_tag_open']    = "<li>";
     $config['prev_tagl_close']  = "</li>";
-    $config['first_link']       = "Awal";
+    $config['first_link']       = "First";
     $config['first_tag_open']   = "<li>";
     $config['first_tagl_close'] = "</li>";
-    $config['last_link']        = 'Terakhir';
+    $config['last_link']        = 'Last';
     $config['last_tag_open']    = "<li>";
     $config['last_tagl_close']  = "</li>";
 
@@ -71,7 +72,7 @@ class Gallery extends CI_Controller {
     $dari = $this->uri->segment('4');
 
     /* eksekusi library pagination ke model penampilan data */
-    $this->data['album_all'] = $this->Album_model->get_all_arsip($config['per_page'],$dari);
+    $this->data['album_all'] = $this->Lapangan_model->get_all_home();
     $this->pagination->initialize($config);
 
     /* memanggil view yang telah disiapkan dan passing data dari model ke view*/

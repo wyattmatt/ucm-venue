@@ -384,7 +384,7 @@ class Transaksi extends CI_Controller
 
     if ($this->form_validation->run() == FALSE)
     {
-      $this->update($this->input->post('id'));
+      $this->update_diskon($this->input->post('id'));
     }
       else
       {
